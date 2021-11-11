@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}user{% endblock %}
+
+
+
+{% block body %}
+{% if  app.user %}
+
+<div class="mb-3">
+    You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+</div>
+{% endif %}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Username</th>
+      <th scope="col">Role</th>
+      <th scope="col">Pwd</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in User %}
+    
+    <tr>
+        <th>{{user.username}}</th>
+        <td></td>
+        <td>{{user.password}}</td>
+        <td><a href="{{path('user_edit',{'id':user.id})}}" type="button" class="btn btn-dark">Modifier</a></td>
+        <td><a href="{{path('deleteuser',{'id':user.id})}}" type="button" class="btn btn-dark">Supprimer</a></td>
+
+       </tr>
+       {% endfor %}
+  </tbody>
+  
+  
+
+</table>
+<center><a class="btn btn-success" href='user/add2'>Add</a></center>
+
+{% endblock %}
